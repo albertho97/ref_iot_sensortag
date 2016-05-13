@@ -1,0 +1,1 @@
+sudo python /home/pi/bluepy/bluepy/sensortag_mqtt.py -host 68:C9:0B:06:44:09

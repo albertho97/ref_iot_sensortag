@@ -1,0 +1,42 @@
+.epoch.my-colors .category1 .line {
+  stroke: red; }
+.epoch.my-colors .category1 .area, .epoch.my-colors .category1 .dot {
+  fill: red; }
+.epoch.my-colors .arc.category1 path {
+  fill: red; }
+.epoch.my-colors .bar.category1 {
+  fill: red; }
+.epoch.my-colors .category2 .line {
+  stroke: green; }
+.epoch.my-colors .category2 .area, .epoch.my-colors .category2 .dot {
+  fill: green; }
+.epoch.my-colors .arc.category2 path {
+  fill: green; }
+.epoch.my-colors .bar.category2 {
+  fill: green; }
+.epoch.my-colors .category3 .line {
+  stroke: blue; }
+.epoch.my-colors .category3 .area, .epoch.my-colors .category3 .dot {
+  fill: blue; }
+.epoch.my-colors .arc.category3 path {
+  fill: blue; }
+.epoch.my-colors .bar.category3 {
+  fill: blue; }
+.epoch.my-colors .category4 .line {
+  stroke: pink; }
+.epoch.my-colors .category4 .area, .epoch.my-colors .category4 .dot {
+  fill: pink; }
+.epoch.my-colors .arc.category4 path {
+  fill: pink; }
+.epoch.my-colors .bar.category4 {
+  fill: pink; }
+.epoch.my-colors .category5 .line {
+  stroke: yellow; }
+.epoch.my-colors .category5 .area, .epoch.my-colors .category5 .dot {
+  fill: yellow; }
+.epoch.my-colors .arc.category5 path {
+  fill: yellow; }
+.epoch.my-colors .bar.category5 {
+  fill: yellow; }
+
+/*# sourceMappingURL=my-colors.css.map */

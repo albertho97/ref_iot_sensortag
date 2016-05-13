@@ -1,0 +1,17 @@
+$colors: red, green, blue, pink, yellow;
+
+.epoch.my-colors {
+  @for $i from 1 through 5 {
+    .category#{$i} {
+      .line { stroke: nth($colors, $i); }
+      .area, .dot { fill: nth($colors, $i); }
+    }
+    .arc.category#{$i} path {
+      fill: nth($colors, $i);
+    }
+    .bar.category#{$i} { 
+      fill: nth($colors, $i);
+    }
+  }
+}
+
