@@ -1,4 +1,4 @@
-# AWS IOT, SensorTag 2650 and Raspberry Pi - Demo 
+# IOT, SensorTag 2650 and Raspberry Pi - Demo 
 This repository demo the integration of AWS IOT, TI SensorTag 2650 and Raspberry Pi 2 (Gateway).
 
 
