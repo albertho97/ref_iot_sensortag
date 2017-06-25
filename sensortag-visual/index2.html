@@ -1,72 +1,76 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Real Time Visualization - Clickstream</title>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="epoch.min.js"></script>
-    <link rel="stylesheet" href="epoch.min.css">
-    <style>
-        html, body {
-            height: 100%;
-            width: 100%;
-            margin: 0 0 0 0;
-        }
-    </style>
+  <meta charset="utf-8">
+  <title>Real Time Visualization - Clickstream</title>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="epoch.min.js"></script>
+  <link rel="stylesheet" href="epoch.min.css">
+  <link rel="stylesheet" href="my-colors.css">
+  <style>
+    html, body
+    {
+      height: 100%;
+      width: 100%;
+      margin: 0 0 0 0
+    }
+  </style>
 </head>
 <body>
-    <div style="width: 100%; height: 100%;">
-        <div style="width: 100%; height: 70px; background-color:black;">
-            <img src="AWS_Booth_App_Header.jpg" style="float:left" />
-            <img src="AWS_Booth_Kinesis_Light.jpg" style="float:right" />
-        </div>
-        <div id="mainDiv" style="width: 100%; height: 100%;margin-top:20px;"></div>
-    </div>
-    <script>
-        var siteArray = ["aws1", "aws2", "aws3", "aws4"];
-        var currentTime = ((new Date).getTime() / 1000) - 10;
+<div style="width: 100%; height: 100%;">
+    <div style="width: 100%; height: 70px; background-color:black;">
+        <img src="AWS_Booth_App_Header.jpg" style="float:left" />
+        <img src="AWS_Booth_Kinesis_Temperature.jpg" style="float:right" />
+	</div>
+    <div id="mainDiv" style="width: 100%; height: 100%;margin-top:20px;"></div>
+</div>
+	<script>
+	  var siteArray = [ "aws1", "aws2", "aws3", "aws4" ];
+	  var currentTime = ((new Date).getTime() /1000) - 10;
 
-        var arrayLength = siteArray.length;
+	  var arrayLength = siteArray.length;
 
-        for (var i = 0; i < arrayLength; i++) {
-            var containerDiv = document.createElement('div');
-            containerDiv.style.width = '100%';
-            containerDiv.style.height = '21%';
+	  for (var i = 0; i < arrayLength; i++) {
+	    var containerDiv = document.createElement('div');
+	    containerDiv.style.width='100%';
+	    containerDiv.style.height='21%';
 
-            var labelDiv = document.createElement('div');
-            labelDiv.style.width = '7%';
-            labelDiv.style.height = '100%';
-            labelDiv.style.position = 'relative';
-            labelDiv.style.float = 'left';
-            labelDiv.style.textAlign = 'center';
-            labelDiv.innerHTML = "<h3>" + siteArray[i] + "</h3>";
+	    var labelDiv = document.createElement('div');
+	    labelDiv.style.width='7%';
+	    labelDiv.style.height='100%';
+	    labelDiv.style.position='relative';
+	    labelDiv.style.float = 'left';
+        labelDiv.style.textAlign ='center'
+	    labelDiv.innerHTML = "<h3>"+siteArray[i]+"</h3>";
 
-            var chartDiv = document.createElement('div');
-            chartDiv.id = siteArray[i] + 'Chart';
-            chartDiv.className = "epoch category20 ";
-            chartDiv.style.width = '93%';
-            chartDiv.style.height = '100%';
-            chartDiv.style.position = 'relative';
-            chartDiv.style.float = 'left';
+	    var chartDiv = document.createElement('div');
+	    chartDiv.id = siteArray[i]+'Chart';
+	    chartDiv.className = "epoch category20 my-colors";
+	    chartDiv.style.width='93%';
+	    chartDiv.style.height='100%';
+	    chartDiv.style.position='relative';
+	    chartDiv.style.float = 'left';
 
-            containerDiv.appendChild(labelDiv);
-            containerDiv.appendChild(chartDiv);
-            document.getElementById('mainDiv').appendChild(containerDiv);
+	    containerDiv.appendChild(labelDiv);
+	    containerDiv.appendChild(chartDiv);
+	    document.getElementById('mainDiv').appendChild(containerDiv);
 
-            eval("var " + siteArray[i] + "Data = [{label:\"" + siteArray[i] + "\",values:[{time:currentTime,y:0}]}];")
-            eval("var " + siteArray[i] + " = $('#" + siteArray[i] + "Chart').epoch({type:'time.line',data:" + siteArray[i] + "Data,axes:['left','bottom','right']});")
-        }
+	    eval("var "+siteArray[i]+"Data = [{label:\""+siteArray[i]+"\",values:[{time:currentTime,y:0}]}];")
+	    eval("var "+siteArray[i]+" = $('#"+siteArray[i]+"Chart').epoch({type:'time.line',data:"+siteArray[i]+"Data,axes:['left','bottom','right']});")
+	  }
 
-        function tick(e) {
-            if (e) {
-                var eventData = JSON.parse(e.data);
-                window[eventData.devicename].push([{ time: ((new Date).getTime() / 1000) - 10, y: eventData.lux }]);
-            }
-        }
+	  function tick(e)
+	  {
+	    if(e)
+	    {
+          var eventData = JSON.parse(e.data);
+          window[eventData.devicename].push([{ time: ((new Date).getTime() / 1000) - 10, y: eventData.irtemp }]);
+	    }
+	  }
 
-        var source = new EventSource('/eventCounters');
-        source.addEventListener('message', tick);
-    </script>
+	  var source = new EventSource('/eventCounters');
+	  source.addEventListener('message',tick);
+	</script>
 </body>
 </html>

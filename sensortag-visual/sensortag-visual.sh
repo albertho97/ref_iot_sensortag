@@ -1,1 +1,1 @@
-node node-app.js sensortagredis.u5yz3o.0001.apne1.cache.amazonaws.com
+sudo /home/ec2-user/.nvm/versions/node/v4.4.5/bin/node node-app.js

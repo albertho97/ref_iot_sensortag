@@ -5,9 +5,9 @@ var http    = require('http')
 , serveStatic = require('serve-static');
 
 function ticker(req,res) {
- req.socket.setTimeout(Infinity);
+ req.socket.setTimeout(Number.MAX_VALUE);
  
-  var subscriber = redis.createClient(6379,process.argv[2]);
+  var subscriber = redis.createClient(6379, 'sensortagredis.u5yz3o.0001.apne1.cache.amazonaws.com');
 	
   subscriber.subscribe("pubsubCounters");
 	
@@ -40,4 +40,4 @@ connect()
             ticker(req,res);
         }
 })
-.listen(9000);
+.listen(80);
