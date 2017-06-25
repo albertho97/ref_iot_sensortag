@@ -30,14 +30,14 @@ def on_message(mqttc, obj, msg):
     
     if isTooDark:
         if isTooDark == "true":
-            os.system("sudo mplayer -af volume=20.1:1 /home/pi/speech_is_too_dark.ogg")
+            os.system("sudo mplayer -af volume=25.1:1 /home/pi/speech_is_too_dark.ogg")
             print ("Blue Light On")
         elif isTooDark == "false":
             print ("Blue Light Off")
 
     if isTooHot:
         if isTooHot == "true":
-            os.system("sudo mplayer -af volume=20.1:1 /home/pi/speech_is_too_hot.ogg")
+            os.system("sudo mplayer -af volume=25.1:1 /home/pi/speech_is_too_hot.ogg")
             print ("Red Light On")
         elif isTooHot == "false":
             print ("Red Light Off")
