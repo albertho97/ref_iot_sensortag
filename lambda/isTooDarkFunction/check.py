@@ -17,7 +17,7 @@ def main(event, context):
         
     wasTooDark = None
     try:
-        response = client.get_thing_shadow(thingName='RaspberryPiGateway')
+        response = client.get_thing_shadow(thingName='SensorTagGateway')
         streamingBody = response["payload"]
         jsonState = json.loads(streamingBody.read())
         wasTooDark = jsonState.get("state").get("reported").get(event.get('DeviceName')).get('isTooDark')
@@ -35,7 +35,7 @@ def main(event, context):
     mypayload = json.dumps(state)
     
     response = client.update_thing_shadow(
-        thingName='RaspberryPiGateway',
+        thingName='SensorTagGateway',
         payload=state
     )
     return "Shadow set completed"        

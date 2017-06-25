@@ -3,13 +3,13 @@
   "description": "Check if Lux is too low",
   "region": "ap-northeast-1",
   "handler": "check.lambda_handler",
-  "role": "arn:aws:iam::768592210975:role/lambda_iot_execution",
+  "role": "arn:aws:iam::281023951838:role/lambda_iot_execution",
   "requirements": ["boto3"],
   "ignore": [
     "circle.yml",
     ".git",
     "/*.pyc"
-  ],
+  ],  
   "timeout": 60,
   "memory": 128
 }
