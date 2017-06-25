@@ -1,2 +1,1 @@
-
-python worker.py RaspberryPiStream --sleep_interval 0.2
+python worker.py SensorTagGatewayStream --sleep_interval 0.2

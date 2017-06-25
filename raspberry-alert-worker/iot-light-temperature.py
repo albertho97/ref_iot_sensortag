@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 def on_connect(mqttc, obj, flags, rc):
     if rc==0:
         print ("Subscriber Connection status code: "+str(rc)+" | Connection status: successful")
-        mqttc.subscribe("$aws/things/RaspberryPiGateway/shadow/update/accepted", qos=1)
+        mqttc.subscribe("$aws/things/SensorTagGateway/shadow/update/accepted", qos=1)
 
     elif rc==1:
         print ("Subscriber Connection status code: "+str(rc)+" | Connection status: Connection refused")
@@ -64,9 +64,9 @@ def main():
     mqttc.on_subscribe = on_subscribe
     mqttc.on_message = on_message
 
-    mqttc.tls_set("./certs/VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
-            certfile="./certs/cb3727e233-certificate.pem.crt",
-            keyfile="./certs/cb3727e233-private.pem.key",
+    mqttc.tls_set( "/home/pi/certs/VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
+            certfile="/home/pi/certs/67463260e3-certificate.pem.crt",
+            keyfile="/home/pi/certs/67463260e3-private.pem.key",
             tls_version=ssl.PROTOCOL_TLSv1_2,
             ciphers=None )
 

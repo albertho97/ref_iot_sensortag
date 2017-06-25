@@ -41,7 +41,7 @@ iter_type_at = 'AT_SEQUENCE_NUMBER'
 iter_type_after = 'AFTER_SEQUENCE_NUMBER'
 iter_type_trim = 'TRIM_HORIZON'
 iter_type_latest = 'LATEST'
-r = redis.StrictRedis(host='sensortagredis.g6jsto.0001.apne1.cache.amazonaws.com', port=6379, db=0)
+r = redis.StrictRedis(host='sensortagredis.u5yz3o.0001.apne1.cache.amazonaws.com', port=6379, db=0)
 
 class datarecord:
     def to_JSON(self):
@@ -52,25 +52,13 @@ def process_to_redis(records):
     for record in records:
         jsonstring = record['Data'].lower()
         json_data = json.loads(jsonstring)
-
+        
+        print (json_data)
         newdata = {"time":json_data["time"], "devicename":json_data["devicename"], "irtemp":json_data["irtemp"], "lux": json_data["lux"]}
         newdatastring = json.dumps(newdata)
 
         print (newdatastring)                
         r.publish('pubsubCounters', newdatastring)
-        
-        
-        if json_data["lux"] < 5:
-            kinesis.put_record(
-                stream_name="LightAlert",
-                data=newdatastring, partition_key=json_data["deviceid"])
-            print ('Lights up')
-
-        if json_data["irtemp"] > 29:
-            kinesis.put_record(
-                stream_name="TemperatureAlert",
-                data=newdatastring, partition_key=json_data["deviceid"])
-            print ('Overheat')
 
 
 class KinesisWorker(threading.Thread):
