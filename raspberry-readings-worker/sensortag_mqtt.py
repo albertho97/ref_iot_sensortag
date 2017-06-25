@@ -124,13 +124,13 @@ def main():
                 #client.on_connect = on_connect
                 #client.on_message = on_message
 
-                client.tls_set( "../../certs/VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
-                        certfile="../../certs/cb3727e233-certificate.pem.crt",
-                        keyfile="../../certs/cb3727e233-private.pem.key",
+                client.tls_set( "/home/pi/certs/VeriSign-Class 3-Public-Primary-Certification-Authority-G5.pem",
+                        certfile="/home/pi/certs/67463260e3-certificate.pem.crt",
+                        keyfile="/home/pi/certs/67463260e3-private.pem.key",
                         tls_version=ssl.PROTOCOL_TLSv1_2,
                         ciphers=None )
 
-                client.connect("A17HTFKPRO3T19.iot.ap-northeast-1.amazonaws.com", 8883, 10)
+                client.connect("ae1ocwjl5a0ho.iot.ap-northeast-1.amazonaws.com", 8883, 10)
                 publish_readings()
                 client.disconnect()   
                 #client.loop_forever()

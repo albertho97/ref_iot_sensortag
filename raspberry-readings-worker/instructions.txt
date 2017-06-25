@@ -1,0 +1,6 @@
+Do the installation from BluePy
+install Paho client MQTT
+
+
+pip install boto
+pip install paho-mqtt
