@@ -4,7 +4,8 @@ import threading
 import paho.mqtt.client as mqtt
 import sys
 import ssl
-import RPi.GPIO as GPIO
+import pygame
+import os
     
 def on_connect(mqttc, obj, flags, rc):
     if rc==0:
@@ -29,35 +30,24 @@ def on_message(mqttc, obj, msg):
     
     if isTooDark:
         if isTooDark == "true":
-            GPIO.setup(17,GPIO.OUT)
-            GPIO.output(17,GPIO.HIGH)
+            os.system("sudo mplayer -af volume=20.1:1 /home/pi/speech_is_too_dark.ogg")
             print ("Blue Light On")
         elif isTooDark == "false":
-            GPIO.setup(17,GPIO.OUT)
-            GPIO.output(17,GPIO.LOW)
             print ("Blue Light Off")
 
     if isTooHot:
         if isTooHot == "true":
-            GPIO.setup(27,GPIO.OUT)
-            GPIO.output(27,GPIO.HIGH)
+            os.system("sudo mplayer -af volume=20.1:1 /home/pi/speech_is_too_hot.ogg")
             print ("Red Light On")
         elif isTooHot == "false":
-            GPIO.setup(27,GPIO.OUT)
-            GPIO.output(27,GPIO.LOW)
             print ("Red Light Off")
 
     
 def main():
     print ("Temperature off")
-    GPIO.setmode(GPIO.BCM)
-    GPIO.cleanup()
-    GPIO.setwarnings(False)
-    GPIO.setup(27,GPIO.OUT)
-    GPIO.output(27,GPIO.LOW)
-    GPIO.setup(17,GPIO.OUT)
-    GPIO.output(17,GPIO.LOW)    
 
+    pygame.mixer.init()
+    
     mqttc = mqtt.Client()
     
     mqttc.on_connect = on_connect
@@ -70,17 +60,16 @@ def main():
             tls_version=ssl.PROTOCOL_TLSv1_2,
             ciphers=None )
 
-    mqttc.connect("A17HTFKPRO3T19.iot.ap-northeast-1.amazonaws.com", 8883, 10)    
+    mqttc.connect("ae1ocwjl5a0ho.iot.ap-northeast-1.amazonaws.com", 8883, 10)
     print ("Connected sucessfully")
         
     mqttc.loop_forever()
 
-    GPIO.cleanup()
-    GPIO.setwarnings(False)
-    GPIO.setup(27,GPIO.OUT)
-    GPIO.output(27,GPIO.LOW)
-    GPIO.setup(17,GPIO.OUT)
-    GPIO.output(17,GPIO.LOW)        
+def test():
+    os.system("sudo mplayer -af volume=20.1:1 /home/pi/speech_is_too_dark.ogg")
 
 if __name__ == '__main__':
+    #test()
     main()
+
+    
